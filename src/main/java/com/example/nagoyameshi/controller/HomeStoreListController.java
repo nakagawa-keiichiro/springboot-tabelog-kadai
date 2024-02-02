@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.nagoyameshi.entity.StoreInformation;
 import com.example.nagoyameshi.repository.StoreInformationRepository;
 
-@Controller
 @RequestMapping("/")
+@Controller
 public class HomeStoreListController {
 	@Autowired
     private StoreInformationRepository storeInformationRepository;	
