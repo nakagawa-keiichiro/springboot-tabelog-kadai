@@ -19,7 +19,7 @@ public class HomeStoreListController {
 	@Autowired
     private StoreInformationRepository storeInformationRepository;	
     
-    @GetMapping("/")
+    @GetMapping("/store")
     public String index(Model model, @PageableDefault(page = 0, size = 3, sort = "storeId", direction = Direction.ASC) Pageable pageable, @RequestParam(name = "keyword", required = false) String keyword) {
         
     	Page<StoreInformation> storeInformationPage;
