@@ -17,8 +17,8 @@ import com.example.nagoyameshi.repository.UserRepository;
 import com.example.nagoyameshi.security.UserDetailsImpl;
 import com.example.nagoyameshi.service.UserService;
 
-@Controller
 @RequestMapping("/user")
+@Controller
 public class UserController {
     private final UserRepository userRepository;    
     private final UserService userService; 

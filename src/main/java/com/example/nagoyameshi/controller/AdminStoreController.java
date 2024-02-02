@@ -29,8 +29,8 @@ import com.example.nagoyameshi.service.StoreService;
 
 import jakarta.validation.Valid;
 
-@Controller
 @RequestMapping("/admin/stores")
+@Controller
 public class AdminStoreController {
 	
 	@Autowired

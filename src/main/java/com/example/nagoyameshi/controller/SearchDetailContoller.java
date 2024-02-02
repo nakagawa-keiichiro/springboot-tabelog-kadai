@@ -20,8 +20,8 @@ import com.example.nagoyameshi.form.ReservationInputForm;
 import com.example.nagoyameshi.repository.CategoryRepository;
 import com.example.nagoyameshi.repository.StoreInformationRepository;
 
-@Controller
 @RequestMapping("/searchDetail")
+@Controller
 public class SearchDetailContoller {
 	@Autowired
     private StoreInformationRepository storeInformationRepository;

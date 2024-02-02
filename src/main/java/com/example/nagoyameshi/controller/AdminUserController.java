@@ -23,8 +23,8 @@ import com.example.nagoyameshi.repository.UserRepository;
 import com.example.nagoyameshi.security.UserDetailsImpl;
 import com.example.nagoyameshi.service.AdminUserService;
 
-@Controller
 @RequestMapping("/admin/users")
+@Controller
 public class AdminUserController {
     private final UserRepository userRepository;
     private final AdminUserService adminUserService;
