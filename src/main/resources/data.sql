@@ -39,20 +39,6 @@ INSERT IGNORE INTO category (category_id, category_name) VALUES (3, '寿司');
 INSERT IGNORE INTO category (category_id, category_name) VALUES (4, '海鮮丼');
 
 
---reviewsテーブル
-INSERT IGNORE INTO reviews (id, user_id, store_id, stars, comment) VALUES (1, 1, 1, 3, 'おいしかった');
-INSERT IGNORE INTO reviews (id, user_id, store_id, stars, comment) VALUES (2, 2, 2, 4, '大変おいしい');
-INSERT IGNORE INTO reviews (id, user_id, store_id, stars, comment) VALUES (3, 1, 1, 3, 'おいしかった');
-INSERT IGNORE INTO reviews (id, user_id, store_id, stars, comment) VALUES (4, 1, 1, 3, 'おいしかった');
-INSERT IGNORE INTO reviews (id, user_id, store_id, stars, comment) VALUES (5, 1, 1, 3, 'おいしかった');
-INSERT IGNORE INTO reviews (id, user_id, store_id, stars, comment) VALUES (6, 1, 1, 3, 'おいしかった');
-INSERT IGNORE INTO reviews (id, user_id, store_id, stars, comment) VALUES (7, 1, 1, 3, 'おいしかった');
-INSERT IGNORE INTO reviews (id, user_id, store_id, stars, comment) VALUES (8, 1, 1, 3, 'おいしかった');
-INSERT IGNORE INTO reviews (id, user_id, store_id, stars, comment) VALUES (9, 1, 1, 3, 'おいしかった');
-INSERT IGNORE INTO reviews (id, user_id, store_id, stars, comment) VALUES (10, 1, 1, 3, 'おいしかった');
-INSERT IGNORE INTO reviews (id, user_id, store_id, stars, comment) VALUES (11, 1, 1, 3, 'おいしかった');
-
-
 --store_information
 INSERT IGNORE INTO store_information (store_id, category_id, store_name, image_name, remarks, price_lower_limit, price_upper_limit, business_hours_open, business_hours_close, postal_code, address, phone_number, regular_holiday) VALUES(1, 1, 'けむり', '/storage/StoreInformation.jpg', '卵焼きが名物', 2000, 4000, '17:00', '2:00', '073-0145', '北海道砂川市西五条南X-XX-XX', '012-345-679', '水曜日');
 INSERT IGNORE INTO store_information (store_id, category_id, store_name, image_name, remarks, price_lower_limit, price_upper_limit, business_hours_open, business_hours_close, postal_code, address, phone_number, regular_holiday) VALUES(2, 2, 'じろう', '/storage/StoreInformation1.jpg', 'こってり系', 1000, 2000, '11:00', '15:00', '030-0945', '青森県青森市桜川X-XX-XX', '012-345-678', '木曜日');

@@ -3,7 +3,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.nagoyameshi.entity.User;
 import com.example.nagoyameshi.form.AdminUserEditForm;
 import com.example.nagoyameshi.repository.UserRepository;
-import com.example.nagoyameshi.security.UserDetailsImpl;
 import com.example.nagoyameshi.service.AdminUserService;
 
 @RequestMapping("/admin/users")
@@ -59,9 +57,9 @@ public class AdminUserController {
         return "admin/users/show";
     }   
     
-    @GetMapping("/edit")
-    public String edit(@AuthenticationPrincipal UserDetailsImpl userDetailsImpl, Model model) {        
-        User user = userRepository.getReferenceById(userDetailsImpl.getUser().getId());  
+    @GetMapping("/edit{id}")
+    public String edit(@PathVariable(name = "id")Integer id , Model model) {        
+        User user = userRepository.getReferenceById(id);  
         AdminUserEditForm adminUserEditForm = new AdminUserEditForm(user.getId(), user.getName(), user.getFurigana(), user.getPostalCode(), user.getAddress(), user.getPhoneNumber(), user.getEmail(), user.getRole().getId());
         
         model.addAttribute("adminUserEditForm", adminUserEditForm);
@@ -78,12 +76,13 @@ public class AdminUserController {
         }
         
         if (bindingResult.hasErrors()) {
-            return "user/edit";
+            return "admin/user/edit";
         }
         
         adminUserService.update(adminUserEditForm);
         redirectAttributes.addFlashAttribute("successMessage", "会員情報を編集しました。");
+        redirectAttributes.addAttribute("id", adminUserEditForm.getId());
         
-        return "redirect:/user";
+        return "redirect:/admin/users/{id}";
     }    
 }

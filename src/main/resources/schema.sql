@@ -45,18 +45,6 @@ CREATE TABLE IF NOT EXISTS category (
      FOREIGN KEY (role_id) REFERENCES roles (id)
  );
  
-  CREATE TABLE IF NOT EXISTS reviews (
-     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-     user_id INT NOT NULL, 
-     store_id INT NOT NULL, 
-     stars INT NOT NULL,
-     comment VARCHAR(255) NOT NULL,
-     registration_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,    
-     FOREIGN KEY (user_id) REFERENCES users (id),
-     FOREIGN KEY (store_id) REFERENCES store_information (store_id)
- );
- 
   CREATE TABLE IF NOT EXISTS verification_tokens (
      id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
      user_id INT NOT NULL UNIQUE,
