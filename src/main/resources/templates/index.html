@@ -71,7 +71,7 @@
 		                             <a th:href="@{/searchDetail/__${storeInformation.getStoreId()}__?add=home}" class="link-dark nagoyameshi-card-link">
 		                                 <div class="card h-100">                                                                        
 		                                     
-		                                     <img th:if="${storeInformation.getImageName()}" th:src="@{__${storeInformation.getImageName()}__}" class="card-img-top nagoyameshi-vertical-card-image" alt="店舗画像">                                     
+		                                     <img th:if="${storeInformation.getImageName()}" th:src="@{/storage/__${storeInformation.getImageName()}__}" class="card-img-top nagoyameshi-vertical-card-image" alt="店舗画像">                                     
 		                                     <img th:unless="${storeInformation.getImageName()}" th:src="" class="card-img-top snagoyameshi-vertical-card-image" alt="NO IMAGE">                                                                                                                        
 		                                     
 		                                     <div class="card-body">   
