@@ -32,7 +32,7 @@
                              </div>                                                 
                              
                              <div class="mb-3">
-                                 <img th:if="${store.getImageName()}" th:src="@{__${store.getImageName()}__}" class="w-100" alt="店舗画像">
+                                 <img th:if="${store.getImageName()}" th:src="@{/storage/__${store.getImageName()}__}" class="w-100" alt="店舗画像">
                                  <img th:unless="${store.getImageName()}" th:src="@{/images/noImage.png}" class="w-100" alt="NO IMAGE">
                              </div>   
                              

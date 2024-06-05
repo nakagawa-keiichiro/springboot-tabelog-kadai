@@ -34,7 +34,6 @@ public class StoreService {
             String hashedImageName = generateNewFileName(imageName);
             Path filePath = Paths.get("src/main/resources/static/storage/" + hashedImageName);
             copyImageFile(imageFile, filePath);
-            hashedImageName = "/storage/" + hashedImageName;
             store.setImageName(hashedImageName);
         }
         
