@@ -35,6 +35,9 @@ public class Reservation {
     @Column(name = "number_of_people")
     private Integer numberOfPeople;    
     
+    @Column(name = "business_hours")
+    private Integer businessHours;  
+    
     @Column(name = "registration_at", insertable = false, updatable = false)
     private Timestamp registrationAt;
     

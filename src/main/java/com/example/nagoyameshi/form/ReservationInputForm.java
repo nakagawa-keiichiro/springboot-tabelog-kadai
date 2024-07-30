@@ -21,6 +21,9 @@ public class ReservationInputForm {
         return LocalDate.parse(checkReservationDate);
     }
     
+    @NotNull(message = "予約時間を選択してください。")
+    private Integer businessHours;
+    
     private String add; 
 
 }

@@ -25,7 +25,7 @@ public class StoreService {
     }    
     
     @Transactional
-    public void create(StoreRegisterForm storeRegisterForm, Integer categoryId) {
+    public void create(StoreRegisterForm storeRegisterForm, Integer categoryId, Integer businessHoursOpen, Integer businessHoursClose) {
     	StoreInformation store = new StoreInformation();        
         MultipartFile imageFile = storeRegisterForm.getImageFile();
         
@@ -42,8 +42,10 @@ public class StoreService {
         store.setRemarks(storeRegisterForm.getRemarks());  
         store.setPriceLowerLimit(storeRegisterForm.getPriceLowerLimit());  
         store.setPriceUpperLimit(storeRegisterForm.getPriceUpperLimit());  
-        store.setBusinessHoursOpen(storeRegisterForm.getBusinessHoursOpen());                
-        store.setBusinessHoursClose(storeRegisterForm.getBusinessHoursClose());
+        //store.setBusinessHoursOpen(storeRegisterForm.getBusinessHoursOpen());                
+        //store.setBusinessHoursClose(storeRegisterForm.getBusinessHoursClose());
+        store.setBusinessHoursOpen(businessHoursOpen);                
+        store.setBusinessHoursClose(businessHoursClose);
         store.setPostalCode(storeRegisterForm.getPostalCode());
         store.setAddress(storeRegisterForm.getAddress());
         store.setPhoneNumber(storeRegisterForm.getPhoneNumber());
@@ -53,7 +55,7 @@ public class StoreService {
     }  
     
     @Transactional
-    public void update(StoreEditForm storeEditForm, Integer categoryId) {
+    public void update(StoreEditForm storeEditForm, Integer categoryId, Integer businessHoursOpen, Integer businessHoursClose) {
     	StoreInformation store = storeInformationRepository.getReferenceById(storeEditForm.getStoreId());
         MultipartFile imageFile = storeEditForm.getImageFile();
         
@@ -70,8 +72,10 @@ public class StoreService {
         store.setRemarks(storeEditForm.getRemarks());  
         store.setPriceLowerLimit(storeEditForm.getPriceLowerLimit());  
         store.setPriceUpperLimit(storeEditForm.getPriceUpperLimit());  
-        store.setBusinessHoursOpen(storeEditForm.getBusinessHoursOpen());                
-        store.setBusinessHoursClose(storeEditForm.getBusinessHoursClose());
+        //store.setBusinessHoursOpen(storeEditForm.getBusinessHoursOpen());                
+        //store.setBusinessHoursClose(storeEditForm.getBusinessHoursClose());
+        store.setBusinessHoursOpen(businessHoursOpen);                
+        store.setBusinessHoursClose(businessHoursClose);
         store.setPostalCode(storeEditForm.getPostalCode());
         store.setAddress(storeEditForm.getAddress());
         store.setPhoneNumber(storeEditForm.getPhoneNumber());

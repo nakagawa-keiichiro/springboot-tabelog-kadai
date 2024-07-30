@@ -32,11 +32,11 @@ public class StoreEditForm {
     @Min(value = 1, message = "料金は1円以上に設定してください。")
     private Integer priceUpperLimit;  
     
-    @NotBlank(message = "開店時間を入力してください。")
-    private String businessHoursOpen;   
+    //@NotBlank(message = "開店時間を入力してください。")
+    private Integer businessHoursOpen;   
     
-    @NotBlank(message = "閉店時間を入力してください。")
-    private String businessHoursClose;  
+    //@NotBlank(message = "閉店時間を入力してください。")
+    private Integer businessHoursClose;  
     
     @NotBlank(message = "定休日を入力してください。")
     private String regularHoliday;  

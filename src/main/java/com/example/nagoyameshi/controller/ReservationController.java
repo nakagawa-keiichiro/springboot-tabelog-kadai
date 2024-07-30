@@ -63,6 +63,17 @@ public class ReservationController {
     	StoreInformation storeInformation = storeInformationRepository.getReferenceById(id);    
     	reservationInputForm.setAdd(topicPath);
         
+        //予約日を取得する
+        LocalDate reservationDate = reservationInputForm.getCheckinDate();
+        
+        // 営業時間のチェック
+        String errorMessage = reservationService.checkBusinessHours(storeInformation, reservationInputForm, reservationDate);
+        if (!errorMessage.isEmpty()) {
+            model.addAttribute("storeInformation", storeInformation); 
+            model.addAttribute("errorMessage", errorMessage); 
+            return "searchDetail/show";
+        }
+
         if (bindingResult.hasErrors()) {            
             model.addAttribute("storeInformation", storeInformation);            
             model.addAttribute("errorMessage", "予約内容に不備があります。"); 
@@ -86,7 +97,7 @@ public class ReservationController {
         //予約日を取得する
         LocalDate reservationDate = reservationInputForm.getCheckinDate();
         
-        ReservationRegisterForm reservationRegisterForm = new ReservationRegisterForm(storeInformation.getStoreId(), user.getId(), reservationDate.toString(), reservationInputForm.getNumberOfPeople(), reservationInputForm.getAdd());
+        ReservationRegisterForm reservationRegisterForm = new ReservationRegisterForm(storeInformation.getStoreId(), user.getId(), reservationDate.toString(), reservationInputForm.getNumberOfPeople(), reservationInputForm.getAdd(), reservationInputForm.getBusinessHours());
         
         model.addAttribute("storeInformation", storeInformation);  
         model.addAttribute("reservationRegisterForm", reservationRegisterForm);       

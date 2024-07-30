@@ -14,4 +14,6 @@ public class ReservationRegisterForm {
     private Integer numberOfPeople;
     
     private String add;
+    
+    private Integer businessHours;
 }

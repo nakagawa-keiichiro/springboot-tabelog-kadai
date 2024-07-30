@@ -82,7 +82,8 @@ public class AdminStoreController {
     } 
     
     @PostMapping("/create")
-    public String create(@ModelAttribute @Valid StoreRegisterForm storeRegisterForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam(name = "category", required = false) Integer categoryId, Model model) {        
+    public String create(@ModelAttribute @Valid StoreRegisterForm storeRegisterForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam(name = "category", required = false) Integer categoryId, 
+    		@RequestParam(name = "businessHoursOpen", required = false) Integer businessHoursOpen, @RequestParam(name = "businessHoursClose", required = false) Integer businessHoursClose, Model model) {        
         if (bindingResult.hasErrors()) {
         	List<Category> category;
         	category = categoryRepository.findAll();
@@ -90,7 +91,7 @@ public class AdminStoreController {
             return "admin/stores/register";
         }
         
-        storeService.create(storeRegisterForm, categoryId);
+        storeService.create(storeRegisterForm, categoryId, businessHoursOpen, businessHoursClose);
         redirectAttributes.addFlashAttribute("successMessage", "店舗を登録しました。");    
         
         return "redirect:/admin/stores";
@@ -113,7 +114,8 @@ public class AdminStoreController {
     }  
     
     @PostMapping("/{id}/update")
-    public String update(@ModelAttribute @Validated StoreEditForm storeEditForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam(name = "category", required = false) Integer categoryId, Model model) {        
+    public String update(@ModelAttribute @Validated StoreEditForm storeEditForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam(name = "category", required = false) Integer categoryId,
+    		@RequestParam(name = "businessHoursOpen", required = false) Integer businessHoursOpen, @RequestParam(name = "businessHoursClose", required = false) Integer businessHoursClose, Model model) {        
         if (bindingResult.hasErrors()) {
         	List<Category> category;
         	category = categoryRepository.findAll();
@@ -121,7 +123,7 @@ public class AdminStoreController {
             return "admin/stores/edit";
         }
         
-        storeService.update(storeEditForm, categoryId);
+        storeService.update(storeEditForm, categoryId, businessHoursOpen, businessHoursClose);
         redirectAttributes.addFlashAttribute("successMessage", "店舗情報を編集しました。");
         
         return "redirect:/admin/stores";

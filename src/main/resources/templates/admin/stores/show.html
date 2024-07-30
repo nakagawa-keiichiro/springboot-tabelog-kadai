@@ -93,7 +93,7 @@
                                      </div>
              
                                      <div class="col">
-                                         <span th:text="${store.getBusinessHoursOpen() + ' ～ ' + store.getBusinessHoursClose() }"></span>
+                                         <span th:text="${store.getBusinessHoursOpen() + ':00' + ' ～ ' + store.getBusinessHoursClose() + ':00'}"></span>
                                      </div>
                                  </div>     
                                  
