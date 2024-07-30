@@ -41,12 +41,12 @@
                                          <label for="categoryId" class="col-form-label text-md-left fw-bold">カテゴリ</label>
                                      </div>
                                      <div class="col-md-8">                                    
-                                         <div class="text-danger small mb-2"></div>                                    
+                                         <div class="text-danger small mb-2">                                   
                                              <select class="form-control form-select" name="category">
                                                  <option value="" hidden>選択してください</option> 
                                              	 <option th:each="category : ${category}" th:value="${category.getCategoryId()}" th:text="${category.getCategoryName()}"></option>
                                              </select>  
-                                         </select>                                                                               
+                                         </div>                                                                               
                                      </div>
                                  </div>
                                  
@@ -97,20 +97,86 @@
                                      <div class="col-md-4">
                                          <label for="businessHoursOpen" class="col-form-label text-md-left fw-bold">開店時間</label>
                                      </div> 
+                                     <!--
                                      <div class="col-md-8">
                                          <div th:if="${#fields.hasErrors('businessHoursOpen')}" class="text-danger small mb-2" th:errors="*{businessHoursOpen}"></div>
                                          <input type="text" class="form-control" th:field="*{businessHoursOpen}">                                
-                                     </div>                                    
+                                     </div>    
+                                     -->
+                                     <div class="col-md-8">                                    
+                                         <div class="text-danger small mb-2">                                   
+                                             <select class="form-control form-select" name="businessHoursOpen">
+                                                 <option value="" hidden>選択してください</option> 
+                                             	 <option value="0">0:00</option>
+                                                 <option value="1">1:00</option>
+                                                 <option value="2">2:00</option>
+                                                 <option value="3">3:00</option>
+                                                 <option value="4">4:00</option>
+                                                 <option value="5" >5:00</option>
+                                                 <option value="6" >6:00</option>
+                                                 <option value="7" >7:00</option>
+                                                 <option value="8" >8:00</option>
+                                                 <option value="9" >9:00</option>
+                                                 <option value="10" >10:00</option>
+                                                 <option value="11" >11:00</option>
+                                                 <option value="12" >12:00</option>
+                                                 <option value="13" >13:00</option>
+                                                 <option value="14" >14:00</option>
+                                                 <option value="15" >15:00</option>
+                                                 <option value="16" >16:00</option>
+                                                 <option value="17" >17:00</option>
+                                                 <option value="18" >18:00</option>
+                                                 <option value="19" >19:00</option>
+                                                 <option value="20" >20:00</option>
+                                                 <option value="21" >21:00</option>
+                                                 <option value="22" >22:00</option>
+                                                 <option value="23" >23:00</option>
+                                             </select>  
+                                         </div>                                                                               
+                                     </div>               
                                  </div>  
                                  
                                  <div class="form-group row mb-3">
                                      <div class="col-md-4">
                                          <label for="businessHoursClose" class="col-form-label text-md-left fw-bold">閉店時間</label>
                                      </div> 
+                                     <!--
                                      <div class="col-md-8">
                                          <div th:if="${#fields.hasErrors('businessHoursClose')}" class="text-danger small mb-2" th:errors="*{businessHoursClose}"></div>
                                          <input type="text" class="form-control" th:field="*{businessHoursClose}">                                
-                                     </div>                                    
+                                     </div>  
+                                     --> 
+                                     <div class="col-md-8">                                    
+                                         <div class="text-danger small mb-2">                                   
+                                             <select class="form-control form-select" name="businessHoursClose">
+                                                 <option value="" hidden>選択してください</option> 
+                                             	 <option value="0">0:00</option>
+                                                 <option value="1">1:00</option>
+                                                 <option value="2">2:00</option>
+                                                 <option value="3">3:00</option>
+                                                 <option value="4">4:00</option>
+                                                 <option value="5" >5:00</option>
+                                                 <option value="6" >6:00</option>
+                                                 <option value="7" >7:00</option>
+                                                 <option value="8" >8:00</option>
+                                                 <option value="9" >9:00</option>
+                                                 <option value="10" >10:00</option>
+                                                 <option value="11" >11:00</option>
+                                                 <option value="12" >12:00</option>
+                                                 <option value="13" >13:00</option>
+                                                 <option value="14" >14:00</option>
+                                                 <option value="15" >15:00</option>
+                                                 <option value="16" >16:00</option>
+                                                 <option value="17" >17:00</option>
+                                                 <option value="18" >18:00</option>
+                                                 <option value="19" >19:00</option>
+                                                 <option value="20" >20:00</option>
+                                                 <option value="21" >21:00</option>
+                                                 <option value="22" >22:00</option>
+                                                 <option value="23" >23:00</option>
+                                             </select>  
+                                         </div>                                                                               
+                                     </div>                                   
                                  </div>                                                              
                                                  
                                  <div class="form-group row mb-3">

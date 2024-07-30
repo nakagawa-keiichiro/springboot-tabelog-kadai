@@ -38,10 +38,10 @@ public class StoreInformation {
     private Integer priceUpperLimit;
     
     @Column(name = "business_hours_open")
-    private String businessHoursOpen;
+    private Integer businessHoursOpen;
     
     @Column(name = "business_hours_close")
-    private String businessHoursClose;
+    private Integer businessHoursClose;
     
     @Column(name = "postal_code")
     private String postalCode;

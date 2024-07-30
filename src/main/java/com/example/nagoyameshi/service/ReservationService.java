@@ -1,5 +1,6 @@
 package com.example.nagoyameshi.service;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.nagoyameshi.entity.Reservation;
 import com.example.nagoyameshi.entity.StoreInformation;
 import com.example.nagoyameshi.entity.User;
+import com.example.nagoyameshi.form.ReservationInputForm;
 import com.example.nagoyameshi.form.ReservationRegisterForm;
 import com.example.nagoyameshi.repository.ReservationRepository;
 import com.example.nagoyameshi.repository.StoreInformationRepository;
@@ -35,7 +37,77 @@ public class ReservationService {
         reservation.setUser(user);
         reservation.setReservationDate(reservationDate);
         reservation.setNumberOfPeople(reservationRegisterForm.getNumberOfPeople());
+        reservation.setBusinessHours(reservationRegisterForm.getBusinessHours());
         
         reservationRepository.save(reservation);
+    } 
+    
+    public String checkBusinessHours(StoreInformation storeInformation, ReservationInputForm reservationInputForm, LocalDate reservationDate) { 
+    	
+    	// 年月日
+        int year = reservationDate.getYear();
+        int month = reservationDate.getMonthValue();
+        int day = reservationDate.getDayOfMonth();
+        
+    	// 予約時間
+    	int businessHours = reservationInputForm.getBusinessHours();
+    	// 開店時間
+    	int businessHoursOpen = storeInformation.getBusinessHoursOpen();
+    	// 閉店時間
+    	int businessHoursClose = storeInformation.getBusinessHoursClose();
+        
+        LocalDateTime  businessHoursDate = LocalDateTime.of(year, month, day, businessHours, 0, 0);
+        LocalDateTime  businessHoursOpenDate = LocalDateTime.of(year, month, day, businessHoursOpen, 0, 0);   
+        LocalDateTime  businessHoursCloseDate = LocalDateTime.of(year, month, day, businessHoursClose, 0, 0);
+        
+    	String errorMessage = "";
+    	int count = 0;
+    	
+    	if(businessHoursOpenDate.isAfter(businessHoursCloseDate)){
+    		
+    		businessHoursCloseDate = businessHoursCloseDate.plusDays(1);
+    		count = 1;
+    	}
+    	
+        if(businessHoursOpenDate.isBefore(businessHoursDate) && businessHoursCloseDate.isAfter(businessHoursDate)){
+        	
+        	errorMessage = "";
+        	
+        } else if(businessHoursOpenDate.isEqual(businessHoursDate) || businessHoursCloseDate.isEqual(businessHoursDate)){
+        	
+        	errorMessage = "";
+        	
+        } else {
+        	
+        	errorMessage = "営業時間外になります。";
+        	
+        }
+        
+        if(count == 1 && !errorMessage.isEmpty()) {
+        	
+        	businessHoursDate = businessHoursDate.plusDays(1);
+        	
+        	if(businessHoursOpenDate.isAfter(businessHoursCloseDate)){
+        		
+        		businessHoursCloseDate = businessHoursCloseDate.plusDays(1);
+        		count = 1;
+        	}
+        	
+            if(businessHoursOpenDate.isBefore(businessHoursDate) && businessHoursCloseDate.isAfter(businessHoursDate)){
+            	
+            	errorMessage = "";
+            	
+            } else if(businessHoursOpenDate.isEqual(businessHoursDate) || businessHoursCloseDate.isEqual(businessHoursDate)){
+            	
+            	errorMessage = "";
+            	
+            } else {
+            	
+            	errorMessage = "営業時間外になります。";
+            	
+            }
+        }
+        
+    	return errorMessage;
     } 
 }

@@ -44,11 +44,11 @@
                                          <label for="categoryId" class="col-form-label text-md-left fw-bold">カテゴリ</label>
                                      </div>
                                      <div class="col-md-8">                                    
-                                         <div class="text-danger small mb-2"></div>                                    
+                                         <div class="text-danger small mb-2">                                  
                                              <select class="form-control form-select" name="category">
                                              	 <option th:each="category : ${category}" th:value="${category.getCategoryId()}" th:text="${category.getCategoryName()}" th:selected="${category == storeEditForm.getCategoryId()}"></option>
                                              </select>  
-                                         </select>                                                                               
+                                         </div>                                                                               
                                      </div>
                                  </div>
                                  
@@ -100,20 +100,86 @@
                                      <div class="col-md-4">
                                          <label for="businessHoursOpen" class="col-form-label text-md-left fw-bold">開店時間</label>
                                      </div> 
+                                     <!--
                                      <div class="col-md-8">
                                          <div th:if="${#fields.hasErrors('businessHoursOpen')}" class="text-danger small mb-2" th:errors="*{businessHoursOpen}"></div>
                                          <input type="text" class="form-control" th:field="*{businessHoursOpen}">                                
-                                     </div>                                    
+                                     </div>  
+                                     -->
+                                     <div class="col-md-8">                                    
+                                         <div class="text-danger small mb-2">                                   
+                                             <select class="form-control form-select" name="businessHoursOpen">
+                                                 <option value="" hidden>選択してください</option> 
+                                             	 <option value="0" th:selected="${storeEditForm.getBusinessHoursOpen() == 0 }">0:00</option>
+                                                 <option value="1" th:selected="${storeEditForm.getBusinessHoursOpen() == 1 }">1:00</option>
+                                                 <option value="2" th:selected="${storeEditForm.getBusinessHoursOpen() == 2 }">2:00</option>
+                                                 <option value="3" th:selected="${storeEditForm.getBusinessHoursOpen() == 3 }">3:00</option>
+                                                 <option value="4" th:selected="${storeEditForm.getBusinessHoursOpen() == 4 }">4:00</option>
+                                                 <option value="5" th:selected="${storeEditForm.getBusinessHoursOpen() == 5 }">5:00</option>
+                                                 <option value="6" th:selected="${storeEditForm.getBusinessHoursOpen() == 6 }">6:00</option>
+                                                 <option value="7" th:selected="${storeEditForm.getBusinessHoursOpen() == 7 }">7:00</option>
+                                                 <option value="8" th:selected="${storeEditForm.getBusinessHoursOpen() == 8 }">8:00</option>
+                                                 <option value="9" th:selected="${storeEditForm.getBusinessHoursOpen() == 9 }">9:00</option>
+                                                 <option value="10" th:selected="${storeEditForm.getBusinessHoursOpen() == 10 }">10:00</option>
+                                                 <option value="11" th:selected="${storeEditForm.getBusinessHoursOpen() == 11 }">11:00</option>
+                                                 <option value="12" th:selected="${storeEditForm.getBusinessHoursOpen() == 12 }">12:00</option>
+                                                 <option value="13" th:selected="${storeEditForm.getBusinessHoursOpen() == 13 }">13:00</option>
+                                                 <option value="14" th:selected="${storeEditForm.getBusinessHoursOpen() == 14 }">14:00</option>
+                                                 <option value="15" th:selected="${storeEditForm.getBusinessHoursOpen() == 15 }">15:00</option>
+                                                 <option value="16" th:selected="${storeEditForm.getBusinessHoursOpen() == 16 }">16:00</option>
+                                                 <option value="17" th:selected="${storeEditForm.getBusinessHoursOpen() == 17 }">17:00</option>
+                                                 <option value="18" th:selected="${storeEditForm.getBusinessHoursOpen() == 18 }">18:00</option>
+                                                 <option value="19" th:selected="${storeEditForm.getBusinessHoursOpen() == 19 }">19:00</option>
+                                                 <option value="20" th:selected="${storeEditForm.getBusinessHoursOpen() == 20 }">20:00</option>
+                                                 <option value="21" th:selected="${storeEditForm.getBusinessHoursOpen() == 21 }">21:00</option>
+                                                 <option value="22" th:selected="${storeEditForm.getBusinessHoursOpen() == 22 }">22:00</option>
+                                                 <option value="23" th:selected="${storeEditForm.getBusinessHoursOpen() == 23 }">23:00</option>
+                                             </select>  
+                                         </div>                                                                               
+                                     </div>                                        
                                  </div>  
                                  
                                  <div class="form-group row mb-3">
                                      <div class="col-md-4">
                                          <label for="businessHoursClose" class="col-form-label text-md-left fw-bold">閉店時間</label>
                                      </div> 
+                                     <!--
                                      <div class="col-md-8">
                                          <div th:if="${#fields.hasErrors('businessHoursClose')}" class="text-danger small mb-2" th:errors="*{businessHoursClose}"></div>
                                          <input type="text" class="form-control" th:field="*{businessHoursClose}">                                
-                                     </div>                                    
+                                     </div>   
+                                     -->    
+                                     <div class="col-md-8">                                    
+                                         <div class="text-danger small mb-2">                                   
+                                             <select class="form-control form-select" name="businessHoursClose">
+                                                 <option value="" hidden>選択してください</option> 
+                                             	 <option value="0" th:selected="${storeEditForm.getBusinessHoursClose() == 0 }">0:00</option>
+                                                 <option value="1" th:selected="${storeEditForm.getBusinessHoursClose() == 1 }">1:00</option>
+                                                 <option value="2" th:selected="${storeEditForm.getBusinessHoursClose() == 2 }">2:00</option>
+                                                 <option value="3" th:selected="${storeEditForm.getBusinessHoursClose() == 3 }">3:00</option>
+                                                 <option value="4" th:selected="${storeEditForm.getBusinessHoursClose() == 4 }">4:00</option>
+                                                 <option value="5" th:selected="${storeEditForm.getBusinessHoursClose() == 5 }">5:00</option>
+                                                 <option value="6" th:selected="${storeEditForm.getBusinessHoursClose() == 6 }">6:00</option>
+                                                 <option value="7" th:selected="${storeEditForm.getBusinessHoursClose() == 7 }">7:00</option>
+                                                 <option value="8" th:selected="${storeEditForm.getBusinessHoursClose() == 8 }">8:00</option>
+                                                 <option value="9" th:selected="${storeEditForm.getBusinessHoursClose() == 9 }">9:00</option>
+                                                 <option value="10" th:selected="${storeEditForm.getBusinessHoursClose() == 10 }">10:00</option>
+                                                 <option value="11" th:selected="${storeEditForm.getBusinessHoursClose() == 11 }">11:00</option>
+                                                 <option value="12" th:selected="${storeEditForm.getBusinessHoursClose() == 12 }">12:00</option>
+                                                 <option value="13" th:selected="${storeEditForm.getBusinessHoursClose() == 13 }">13:00</option>
+                                                 <option value="14" th:selected="${storeEditForm.getBusinessHoursClose() == 14 }">14:00</option>
+                                                 <option value="15" th:selected="${storeEditForm.getBusinessHoursClose() == 15 }">15:00</option>
+                                                 <option value="16" th:selected="${storeEditForm.getBusinessHoursClose() == 16 }">16:00</option>
+                                                 <option value="17" th:selected="${storeEditForm.getBusinessHoursClose() == 17 }">17:00</option>
+                                                 <option value="18" th:selected="${storeEditForm.getBusinessHoursClose() == 18 }">18:00</option>
+                                                 <option value="19" th:selected="${storeEditForm.getBusinessHoursClose() == 19 }">19:00</option>
+                                                 <option value="20" th:selected="${storeEditForm.getBusinessHoursClose() == 20 }">20:00</option>
+                                                 <option value="21" th:selected="${storeEditForm.getBusinessHoursClose() == 21 }">21:00</option>
+                                                 <option value="22" th:selected="${storeEditForm.getBusinessHoursClose() == 22 }">22:00</option>
+                                                 <option value="23" th:selected="${storeEditForm.getBusinessHoursClose() == 23 }">23:00</option>
+                                             </select>  
+                                         </div>                                                                               
+                                     </div>                                   
                                  </div>                                                              
                                                  
                                  <div class="form-group row mb-3">
