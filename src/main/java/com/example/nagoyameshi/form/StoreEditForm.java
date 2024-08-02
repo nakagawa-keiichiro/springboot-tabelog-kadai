@@ -14,6 +14,7 @@ public class StoreEditForm {
     @NotNull
     private Integer storeId;  
     
+    @NotNull(message = "カテゴリを選択してください。")
     private Integer categoryId;  
     
     @NotBlank(message = "店舗名を入力してください。")
@@ -32,10 +33,10 @@ public class StoreEditForm {
     @Min(value = 1, message = "料金は1円以上に設定してください。")
     private Integer priceUpperLimit;  
     
-    //@NotBlank(message = "開店時間を入力してください。")
+    @NotNull(message = "開店時間を入力してください。")
     private Integer businessHoursOpen;   
     
-    //@NotBlank(message = "閉店時間を入力してください。")
+    @NotNull(message = "閉店時間を入力してください。")
     private Integer businessHoursClose;  
     
     @NotBlank(message = "定休日を入力してください。")

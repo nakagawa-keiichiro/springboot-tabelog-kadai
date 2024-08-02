@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.nagoyameshi.entity.Category;
@@ -84,7 +85,13 @@ public class AdminStoreController {
     @PostMapping("/create")
     public String create(@ModelAttribute @Valid StoreRegisterForm storeRegisterForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam(name = "category", required = false) Integer categoryId, 
     		@RequestParam(name = "businessHoursOpen", required = false) Integer businessHoursOpen, @RequestParam(name = "businessHoursClose", required = false) Integer businessHoursClose, Model model) {        
-        if (bindingResult.hasErrors()) {
+        
+    	MultipartFile imageFile = storeRegisterForm.getImageFile();
+        if (imageFile.isEmpty()) {
+            // imageFileが空の場合、BindingResultにエラーを追加
+            bindingResult.rejectValue("imageFile", "error.imageFile", "画像ファイルを選択してください。");
+        }
+    	if (bindingResult.hasErrors()) {
         	List<Category> category;
         	category = categoryRepository.findAll();
         	model.addAttribute("category", category);
@@ -116,7 +123,13 @@ public class AdminStoreController {
     @PostMapping("/{id}/update")
     public String update(@ModelAttribute @Validated StoreEditForm storeEditForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam(name = "category", required = false) Integer categoryId,
     		@RequestParam(name = "businessHoursOpen", required = false) Integer businessHoursOpen, @RequestParam(name = "businessHoursClose", required = false) Integer businessHoursClose, Model model) {        
-        if (bindingResult.hasErrors()) {
+        
+    	MultipartFile imageFile = storeEditForm.getImageFile();
+        if (imageFile.isEmpty()) {
+            // imageFileが空の場合、BindingResultにエラーを追加
+            bindingResult.rejectValue("imageFile", "error.imageFile", "画像ファイルを選択してください。");
+        }
+    	if (bindingResult.hasErrors()) {
         	List<Category> category;
         	category = categoryRepository.findAll();
         	model.addAttribute("category", category);
