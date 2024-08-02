@@ -56,12 +56,20 @@ public class ReservationService {
     	// 閉店時間
     	int businessHoursClose = storeInformation.getBusinessHoursClose();
         
-        LocalDateTime  businessHoursDate = LocalDateTime.of(year, month, day, businessHours, 0, 0);
-        LocalDateTime  businessHoursOpenDate = LocalDateTime.of(year, month, day, businessHoursOpen, 0, 0);   
-        LocalDateTime  businessHoursCloseDate = LocalDateTime.of(year, month, day, businessHoursClose, 0, 0);
+        LocalDateTime businessHoursDate = LocalDateTime.of(year, month, day, businessHours, 0, 0);
+        LocalDateTime businessHoursOpenDate = LocalDateTime.of(year, month, day, businessHoursOpen, 0, 0);   
+        LocalDateTime businessHoursCloseDate = LocalDateTime.of(year, month, day, businessHoursClose, 0, 0);
+        LocalDateTime currentDate = LocalDateTime.now();
         
     	String errorMessage = "";
     	int count = 0;
+    	
+    	if(currentDate.isAfter(businessHoursDate)){
+    		
+    		errorMessage = "予約時間を過ぎています。";
+    		
+    		return errorMessage;
+    	}
     	
     	if(businessHoursOpenDate.isAfter(businessHoursCloseDate)){
     		
