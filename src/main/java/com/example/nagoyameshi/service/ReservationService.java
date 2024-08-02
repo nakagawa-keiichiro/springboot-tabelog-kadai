@@ -60,6 +60,7 @@ public class ReservationService {
         LocalDateTime businessHoursOpenDate = LocalDateTime.of(year, month, day, businessHoursOpen, 0, 0);   
         LocalDateTime businessHoursCloseDate = LocalDateTime.of(year, month, day, businessHoursClose, 0, 0);
         LocalDateTime currentDate = LocalDateTime.now();
+        currentDate = LocalDateTime.of(currentDate.getYear(), currentDate.getMonthValue(), currentDate.getDayOfMonth(), currentDate.getHour(), currentDate.getMinute(), 0);
         
     	String errorMessage = "";
     	int count = 0;
