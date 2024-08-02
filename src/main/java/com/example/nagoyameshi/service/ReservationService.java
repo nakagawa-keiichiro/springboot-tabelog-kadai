@@ -1,6 +1,7 @@
 package com.example.nagoyameshi.service;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,9 +46,9 @@ public class ReservationService {
     public String checkBusinessHours(StoreInformation storeInformation, ReservationInputForm reservationInputForm, LocalDate reservationDate) { 
     	
     	// 年月日
-        int year = reservationDate.getYear();
-        int month = reservationDate.getMonthValue();
-        int day = reservationDate.getDayOfMonth();
+        //int year = reservationDate.getYear();
+        //int month = reservationDate.getMonthValue();
+        //int day = reservationDate.getDayOfMonth();
         
     	// 予約時間
     	int businessHours = reservationInputForm.getBusinessHours();
@@ -55,12 +56,33 @@ public class ReservationService {
     	int businessHoursOpen = storeInformation.getBusinessHoursOpen();
     	// 閉店時間
     	int businessHoursClose = storeInformation.getBusinessHoursClose();
+    	
+        // 現在日時を特定のタイムゾーンで取得
+        ZoneId zoneId = ZoneId.of("Asia/Tokyo");  // ローカルタイムゾーンに合わせて設定
+        ZonedDateTime currentZonedDateTime = ZonedDateTime.now(zoneId);
         
-        LocalDateTime businessHoursDate = LocalDateTime.of(year, month, day, businessHours, 0, 0);
-        LocalDateTime businessHoursOpenDate = LocalDateTime.of(year, month, day, businessHoursOpen, 0, 0);   
-        LocalDateTime businessHoursCloseDate = LocalDateTime.of(year, month, day, businessHoursClose, 0, 0);
-        LocalDateTime currentDate = LocalDateTime.now();
-        currentDate = LocalDateTime.of(currentDate.getYear(), currentDate.getMonthValue(), currentDate.getDayOfMonth(), currentDate.getHour(), currentDate.getMinute(), 0);
+        // 予約日及び営業時間を同じタイムゾーンに設定
+        ZonedDateTime businessHoursDate = ZonedDateTime.of(
+                reservationDate.getYear(), reservationDate.getMonthValue(), reservationDate.getDayOfMonth(),
+                businessHours, 0, 0, 0, zoneId);
+        
+        ZonedDateTime businessHoursOpenDate = ZonedDateTime.of(
+                reservationDate.getYear(), reservationDate.getMonthValue(), reservationDate.getDayOfMonth(),
+                businessHoursOpen, 0, 0, 0, zoneId);
+        
+        ZonedDateTime businessHoursCloseDate = ZonedDateTime.of(
+                reservationDate.getYear(), reservationDate.getMonthValue(), reservationDate.getDayOfMonth(),
+                businessHoursClose, 0, 0, 0, zoneId);
+        
+        ZonedDateTime currentDate = ZonedDateTime.of(
+                currentZonedDateTime.getYear(), currentZonedDateTime.getMonthValue(), currentZonedDateTime.getDayOfMonth(), 
+                currentZonedDateTime.getHour(), currentZonedDateTime.getMinute(), 0, 0, zoneId);
+        
+       // LocalDateTime businessHoursDate = LocalDateTime.of(year, month, day, businessHours, 0, 0);
+       // LocalDateTime businessHoursOpenDate = LocalDateTime.of(year, month, day, businessHoursOpen, 0, 0);   
+       // LocalDateTime businessHoursCloseDate = LocalDateTime.of(year, month, day, businessHoursClose, 0, 0);
+       // LocalDateTime currentDate = LocalDateTime.now();
+       // currentDate = LocalDateTime.of(currentDate.getYear(), currentDate.getMonthValue(), currentDate.getDayOfMonth(), currentDate.getHour(), currentDate.getMinute(), 0);
         
     	String errorMessage = "";
     	int count = 0;
