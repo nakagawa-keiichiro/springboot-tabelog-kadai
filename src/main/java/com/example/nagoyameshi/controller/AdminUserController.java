@@ -106,8 +106,13 @@ public class AdminUserController {
         
     	User user = userRepository.getReferenceById(userPasswordEditForm.getId());  
 
-        if (!adminUserService.isPassword(user, userPasswordEditForm) || adminUserService.isPasswordChanged(user, userPasswordEditForm)) {
-            FieldError fieldError = new FieldError(bindingResult.getObjectName(), "password", "すでに登録済みのパスワードです。");
+        if (!adminUserService.isPassword(user, userPasswordEditForm)) {
+            FieldError fieldError = new FieldError(bindingResult.getObjectName(), "password", "パスワードが違います。");
+            bindingResult.addError(fieldError);                       
+        }
+        
+        if (adminUserService.isPasswordChanged(user, userPasswordEditForm)) {
+            FieldError fieldError = new FieldError(bindingResult.getObjectName(), "newPassword", "すでに登録済みのパスワードです。");
             bindingResult.addError(fieldError);                       
         }
         
