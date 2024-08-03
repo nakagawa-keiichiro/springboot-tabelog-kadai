@@ -73,7 +73,6 @@ public class AdminUserService {
     	return passwordEncoder.matches(adminUserEditForm.getNewPassword(), user.getPassword());
     }  
        
-        		
     
     @Transactional
     public void passwordUpdate(User user, UserPasswordEditForm adminUserEditForm) {

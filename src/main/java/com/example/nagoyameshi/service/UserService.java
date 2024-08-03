@@ -8,6 +8,7 @@ import com.example.nagoyameshi.entity.Role;
 import com.example.nagoyameshi.entity.User;
 import com.example.nagoyameshi.form.SignupForm;
 import com.example.nagoyameshi.form.UserEditForm;
+import com.example.nagoyameshi.form.UserPasswordEditForm;
 import com.example.nagoyameshi.repository.RoleRepository;
 import com.example.nagoyameshi.repository.UserRepository;
 
@@ -80,4 +81,23 @@ public class UserService {
         User currentUser = userRepository.getReferenceById(userEditForm.getId());
         return !userEditForm.getEmail().equals(currentUser.getEmail());      
     }  
+    
+    // パスワードの入力値が一致するかどうかをチェックする
+    public boolean isPassword(User user, UserPasswordEditForm userPasswordEditForm) {
+        return passwordEncoder.matches(userPasswordEditForm.getPassword(), user.getPassword());
+    }  
+    
+    // パスワードが変更されているかどうかをチェックする
+    public boolean isPasswordChanged(User user, UserPasswordEditForm userPasswordEditForm) {
+    	return passwordEncoder.matches(userPasswordEditForm.getNewPassword(), user.getPassword());
+    }  
+       
+        		
+    @Transactional
+    public void passwordUpdate(User user, UserPasswordEditForm userPasswordEditForm) {
+        
+        user.setPassword(passwordEncoder.encode(userPasswordEditForm.getNewPassword()));
+        
+        userRepository.save(user);
+    } 
 }
