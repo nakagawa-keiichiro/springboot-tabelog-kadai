@@ -1,11 +1,13 @@
 package com.example.nagoyameshi.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.nagoyameshi.entity.Role;
 import com.example.nagoyameshi.entity.User;
 import com.example.nagoyameshi.form.AdminUserEditForm;
+import com.example.nagoyameshi.form.UserPasswordEditForm;
 import com.example.nagoyameshi.repository.RoleRepository;
 import com.example.nagoyameshi.repository.UserRepository;
 
@@ -13,10 +15,12 @@ import com.example.nagoyameshi.repository.UserRepository;
 public class AdminUserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
     
-    public AdminUserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public AdminUserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;        
+        this.roleRepository = roleRepository;    
+        this.passwordEncoder = passwordEncoder;
     }    
     
     @Transactional
@@ -58,4 +62,25 @@ public class AdminUserService {
         User currentUser = userRepository.getReferenceById(adminUserEditForm.getId());
         return !adminUserEditForm.getEmail().equals(currentUser.getEmail());      
     } 
+    
+    // パスワードの入力値が一致するかどうかをチェックする
+    public boolean isPassword(User user, UserPasswordEditForm adminUserEditForm) {
+        return passwordEncoder.matches(adminUserEditForm.getPassword(), user.getPassword());
+    }  
+    
+    // パスワードが変更されているかどうかをチェックする
+    public boolean isPasswordChanged(User user, UserPasswordEditForm adminUserEditForm) {
+    	return passwordEncoder.matches(adminUserEditForm.getNewPassword(), user.getPassword());
+    }  
+       
+        		
+    
+    @Transactional
+    public void passwordUpdate(User user, UserPasswordEditForm adminUserEditForm) {
+        
+        user.setPassword(passwordEncoder.encode(adminUserEditForm.getNewPassword()));
+        
+        userRepository.save(user);
+    } 
+    
 }

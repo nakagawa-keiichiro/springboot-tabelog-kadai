@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.nagoyameshi.entity.User;
 import com.example.nagoyameshi.form.AdminUserEditForm;
+import com.example.nagoyameshi.form.UserPasswordEditForm;
 import com.example.nagoyameshi.repository.UserRepository;
 import com.example.nagoyameshi.service.AdminUserService;
 
@@ -84,5 +85,40 @@ public class AdminUserController {
         redirectAttributes.addAttribute("id", adminUserEditForm.getId());
         
         return "redirect:/admin/users/{id}";
-    }    
+    } 
+    
+    @GetMapping("/password{id}")
+    public String password(@PathVariable(name = "id")Integer id , Model model) {        
+        User user = userRepository.getReferenceById(id);  
+        UserPasswordEditForm userPasswordEditForm = new UserPasswordEditForm(user.getId(), user.getPassword(), "");
+        
+        model.addAttribute("userPasswordEditForm", userPasswordEditForm);
+        
+        return "admin/users/password";
+    } 
+    
+    @PostMapping("/passwordUpdate")
+    public String passwordUpdate(@ModelAttribute @Validated UserPasswordEditForm userPasswordEditForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        
+    	if (bindingResult.hasErrors()) {
+            return "admin/users/password";
+        }
+        
+    	User user = userRepository.getReferenceById(userPasswordEditForm.getId());  
+
+        if (!adminUserService.isPassword(user, userPasswordEditForm) || adminUserService.isPasswordChanged(user, userPasswordEditForm)) {
+            FieldError fieldError = new FieldError(bindingResult.getObjectName(), "password", "すでに登録済みのパスワードです。");
+            bindingResult.addError(fieldError);                       
+        }
+        
+    	if (bindingResult.hasErrors()) {
+            return "admin/users/password";
+        }
+        
+        adminUserService.passwordUpdate(user, userPasswordEditForm);
+        redirectAttributes.addFlashAttribute("successMessage", "パスワードを変更しました。");
+        redirectAttributes.addAttribute("id", userPasswordEditForm.getId());
+        
+        return "redirect:/admin/users/{id}";
+    } 
 }

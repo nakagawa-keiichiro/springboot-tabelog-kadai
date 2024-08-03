@@ -24,8 +24,11 @@
                              </nav> 
                              
                              <div class="d-flex justify-content-end align-items-end mb-3">                    
-                                 <div>
+                                 <div class="me-4">
                                      <a th:href="@{/admin/users/edit__${user.getId()}__}">編集</a>                        
+                                 </div>
+                                 <div>
+                                     <a th:href="@{/admin/users/password__${user.getId()}__}">パスワード変更</a>                        
                                  </div>
                              </div> 
                              
