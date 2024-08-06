@@ -52,7 +52,9 @@
                                  <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownGeneral">   
 									                                                                
                                      <a class="dropdown-item nagoyameshi-dropdown-item" th:href="@{/user}">会員情報</a>
-                                     <a class="dropdown-item nagoyameshi-dropdown-item" th:href="@{/reservations}">予約一覧</a>   
+                                     <a class="dropdown-item nagoyameshi-dropdown-item" th:href="@{/reservations}">予約一覧</a> 
+                                     <a sec:authorize="hasRole('MEMBER')" class="dropdown-item nagoyameshi-dropdown-item" th:href="@{/subscription}">有料プラン登録</a>  
+                                     <a sec:authorize="hasRole('ROLE_PREMIUM_MEMBER')" class="dropdown-item nagoyameshi-dropdown-item" th:href="@{/subscription/cancel}">有料プラン解約</a>  
                                      
                                      <div class="dropdown-divider"></div>
                                          
