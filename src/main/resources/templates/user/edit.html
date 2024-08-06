@@ -34,15 +34,15 @@
                                          <label for="name" class="col-form-label text-md-left fw-bold">
                                              <div class="d-flex align-items-center">
                                                  <span class="me-1">会員</span>
-                                                 <span class="badge bg-danger">必須</span>
                                              </div>
                                          </label>
                                      </div>
                                      <div class="col-md-7">                                    
-                                         <select class="form-control form-select" name="roleId">
+                                         <select class="form-control form-select" name="roleId" disabled>
 	                                         <option value="2" th:selected="*{roleId == 2}">無料会員</option>
 	                                         <option value="3" th:selected="*{roleId == 3}">有料会員</option>
 	                                     </select>  
+	                                     <input type="hidden" th:field="*{roleId}">
                                      </div>
                                  </div>
                                  
