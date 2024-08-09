@@ -54,3 +54,37 @@ INSERT IGNORE INTO store_information (store_id, category_id, store_name, image_n
 
 --verification_tokens
 INSERT IGNORE INTO verification_tokens (id, user_id, token) VALUES (1, 14, 'e37060c8-57d6-41e0-a454-d25793bfa5be');
+
+--reviewテーブル
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (1, 1, 1, 4, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (2, 1, 2, 5, '最高に美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (3, 1, 3, 4, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (4, 1, 4, 3, '普通でしたです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (5, 1, 5, 5, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (6, 1, 6, 2, 'まあまでした。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (7, 1, 7, 4, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (8, 1, 8, 4, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (9, 1, 9, 3, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (10, 1, 10, 4, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (11, 1, 11, 5, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (12, 2, 1, 5, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (13, 3, 1, 5, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (14, 4, 1, 5, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (15, 5, 1, 5, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (16, 6, 1, 5, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (17, 2, 2, 5, '最高に美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (18, 2, 3, 4, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (19, 2, 4, 3, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (20, 2, 5, 5, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (21, 2, 6, 2, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (22, 2, 7, 4, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (23, 2, 8, 4, '美味しかったです。');
+INSERT IGNORE INTO review (id, store_id, user_id, evaluation, comments) VALUES (24, 2, 9, 1, 'う～ん...');
+
+--favoriteテーブル
+INSERT IGNORE INTO favorite (id, store_id, user_id) VALUES (1, 1, 1);
+INSERT IGNORE INTO favorite (id, store_id, user_id) VALUES (2, 2, 1);
+INSERT IGNORE INTO favorite (id, store_id, user_id) VALUES (3, 3, 1);
+INSERT IGNORE INTO favorite (id, store_id, user_id) VALUES (4, 4, 1);
+INSERT IGNORE INTO favorite (id, store_id, user_id) VALUES (5, 5, 1);
+INSERT IGNORE INTO favorite (id, store_id, user_id) VALUES (6, 6, 1);

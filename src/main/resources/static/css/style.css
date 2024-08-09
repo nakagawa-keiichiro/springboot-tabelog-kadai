@@ -160,6 +160,10 @@
    
  }
  
+  .nagoyameshi-star{
+	 color: darkorange;
+ }
+ 
   .nagoyameshi-search-detail {
     position: absolute;
     top: 60%;

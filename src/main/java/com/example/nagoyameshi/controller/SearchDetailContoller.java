@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.nagoyameshi.entity.Category;
+import com.example.nagoyameshi.entity.Favorite;
 import com.example.nagoyameshi.entity.StoreInformation;
+import com.example.nagoyameshi.entity.User;
 import com.example.nagoyameshi.form.ReservationInputForm;
 import com.example.nagoyameshi.repository.CategoryRepository;
+import com.example.nagoyameshi.repository.FavoriteRepository;
 import com.example.nagoyameshi.repository.StoreInformationRepository;
+import com.example.nagoyameshi.security.UserDetailsImpl;
+import com.example.nagoyameshi.service.FavoriteService;
 
 @RequestMapping("/searchDetail")
 @Controller
@@ -29,9 +35,17 @@ public class SearchDetailContoller {
 	@Autowired
     private final CategoryRepository categoryRepository;
 	
-    public SearchDetailContoller(StoreInformationRepository storeInformationRepository, CategoryRepository categoryRepository) {
+	@Autowired
+	private final FavoriteService favoriteService;
+	
+	@Autowired
+	private final FavoriteRepository favoriteRepository;
+	
+    public SearchDetailContoller(StoreInformationRepository storeInformationRepository, CategoryRepository categoryRepository, FavoriteRepository favoriteRepository, FavoriteService favoriteService) {
         this.storeInformationRepository = storeInformationRepository;    
         this.categoryRepository = categoryRepository;
+		this.favoriteRepository = favoriteRepository;
+		this.favoriteService = favoriteService;
     }	
   
     @GetMapping
@@ -91,12 +105,25 @@ public class SearchDetailContoller {
     }
     
     @GetMapping("/{id}")
-    public String show(@PathVariable(name = "id") Integer id,@RequestParam("add") String topicPath, Model model) {
+    public String show(@PathVariable(name = "id") Integer id,@RequestParam("add") String topicPath, Model model, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
     	StoreInformation storeInformation = storeInformationRepository.findByStoreId(id);
+    	
+        Favorite favorite = null;
+        boolean isFavorite = false;
+        if (userDetailsImpl != null) {
+        	User user = userDetailsImpl.getUser();
+        	isFavorite = favoriteService.isFavorite(storeInformation, user);
+        	if (isFavorite) {
+        		favorite = favoriteRepository.findByStoreAndUser(storeInformation, user);
+        	}
+        	
+        }
         
         model.addAttribute("storeInformation", storeInformation);  
         model.addAttribute("topicPath", topicPath);
         model.addAttribute("reservationInputForm", new ReservationInputForm());
+        model.addAttribute("favorite", favorite);
+        model.addAttribute("isFavorite", isFavorite);
         
         return "searchDetail/show";
     }    
