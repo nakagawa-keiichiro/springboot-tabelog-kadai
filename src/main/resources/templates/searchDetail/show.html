@@ -29,14 +29,43 @@
                                      <li class="breadcrumb-item"><a th:href="@{/searchDetail}">店舗詳細検索</a></li>
                                      <li class="breadcrumb-item active" aria-current="page">店舗詳細</li>
                                  </ol>
+                             <!--お気に入り追加ボタン-->
+							 <div class="text-end">
+								 <div sec:authorize="hasRole('ROLE_PREMIUM_MEMBER')">
+									 <div th:if="${isFavorite}">
+										 <a href="#" class="un-favorite-btn" onclick="event.preventDefault(); document.getElementById('favorite-form').submit();">&#9829;お気に入り解除</a>
+										 <form method="post" th:action="@{/store/__${storeInformation.getStoreId()}__/favorite/__${favorite.getId()}__/delete?add=__${topicPath}__}" id="favorite-form" class="d-none">
+											 
+										 </form>
+										 
+									 </div>
+									 <div th:unless="${isFavorite}">
+										 <a href="#" class="favorite-btn" onclick="event.preventDefault(); document.getElementById('favorite-form').submit();">&#9825;お気に入り追加</a>	
+										 <form method="post" th:action="@{/store/__${storeInformation.getStoreId()}__/favorite/create?add=__${topicPath}__}" id="favorite-form" class="d-none"></form>
+									 </div>
+								 </div>
+							 </div>
+							 <div class="text-end">
+								 <div sec:authorize="hasRole('MEMBER')">
+									 
+									 
+										 <a th:href="@{/subscription}" class="btn favorite-btn" >&#9825;お気に入り追加</a>	
+										 
+									
+								 </div>
+							 </div>
+
                              </nav> 
-                             
+                             <div th:if="${successMessage}" class="alert alert-info">
+                                 <span th:text="${successMessage}"></span>
+                             </div>  
                              <h1 class="mb-4 text-center" th:text="${storeInformation.getStoreName()}"></h1>                                                           
                              
                              <div th:if="${errorMessage}" class="alert alert-danger">
                                  <span th:text="${errorMessage}"></span>
                              </div>                                                                         
                              
+							 
                              <div class="mb-4">
                                  <img th:if="${storeInformation.getImageName()}" th:src="@{/storage/__${storeInformation.getImageName()}__}" class="w-100" alt="店舗画像">
                                  <img th:unless="${storeInformation.getImageName()}" th:src="@{/images/noImage.png}" class="w-100" alt="NO IMAGE">
@@ -191,7 +220,13 @@
                                              </div>
                                          </div>  
                                      </div>  
-                                                                                                               
+                                                  
+                                      <div class="row justify-content-center mb-4">
+										 <div class="col-lg-4">
+											 <a class="btn text-white shadow-sm w-100 nagoyameshi-btn" th:href="@{__${storeInformation.getStoreId()}__/review}" >レビューを見る</a>
+										 </div>
+								 	</div>    
+								 	                                           
                                  </div>                                                                                             
                              </div>
                          </div>
