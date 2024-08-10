@@ -83,8 +83,7 @@ public class AdminStoreController {
     } 
     
     @PostMapping("/create")
-    public String create(@ModelAttribute @Valid StoreRegisterForm storeRegisterForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam(name = "category", required = false) Integer categoryId, 
-    		@RequestParam(name = "businessHoursOpen", required = false) Integer businessHoursOpen, @RequestParam(name = "businessHoursClose", required = false) Integer businessHoursClose, Model model) {        
+    public String create(@ModelAttribute @Valid StoreRegisterForm storeRegisterForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {        
         
     	MultipartFile imageFile = storeRegisterForm.getImageFile();
         if (imageFile.isEmpty()) {
@@ -98,7 +97,7 @@ public class AdminStoreController {
             return "admin/stores/register";
         }
         
-        storeService.create(storeRegisterForm, categoryId, businessHoursOpen, businessHoursClose);
+        storeService.create(storeRegisterForm);
         redirectAttributes.addFlashAttribute("successMessage", "店舗を登録しました。");    
         
         return "redirect:/admin/stores";

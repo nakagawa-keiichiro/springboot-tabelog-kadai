@@ -25,7 +25,7 @@ public class StoreService {
     }    
     
     @Transactional
-    public void create(StoreRegisterForm storeRegisterForm, Integer categoryId, Integer businessHoursOpen, Integer businessHoursClose) {
+    public void create(StoreRegisterForm storeRegisterForm) {
     	StoreInformation store = new StoreInformation();        
         MultipartFile imageFile = storeRegisterForm.getImageFile();
         
@@ -38,14 +38,12 @@ public class StoreService {
         }
         
         store.setStoreName(storeRegisterForm.getStoreName());  
-        store.setCategoryId(categoryId);  
+        store.setCategoryId(storeRegisterForm.getCategoryId());  
         store.setRemarks(storeRegisterForm.getRemarks());  
         store.setPriceLowerLimit(storeRegisterForm.getPriceLowerLimit());  
         store.setPriceUpperLimit(storeRegisterForm.getPriceUpperLimit());  
-        //store.setBusinessHoursOpen(storeRegisterForm.getBusinessHoursOpen());                
-        //store.setBusinessHoursClose(storeRegisterForm.getBusinessHoursClose());
-        store.setBusinessHoursOpen(businessHoursOpen);                
-        store.setBusinessHoursClose(businessHoursClose);
+        store.setBusinessHoursOpen(storeRegisterForm.getBusinessHoursOpen());                
+        store.setBusinessHoursClose(storeRegisterForm.getBusinessHoursClose());
         store.setPostalCode(storeRegisterForm.getPostalCode());
         store.setAddress(storeRegisterForm.getAddress());
         store.setPhoneNumber(storeRegisterForm.getPhoneNumber());
